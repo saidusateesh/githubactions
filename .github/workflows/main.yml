@@ -1,0 +1,25 @@
+name: git integration
+ 
+on:
+  push:
+    branches:
+      - main
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+ 
+    - name: Run tests
+      run: |
+        # run tests here
+ 
+    - name: Trigger Jenkins job
+      if: success()
+      uses: jenkins-actions/jenkins-action@v1
+      with:
+        url: http://52.14.62.107:8080/
+        job: git integration
